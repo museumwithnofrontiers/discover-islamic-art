@@ -1,22 +1,77 @@
-@import './base.css';
+:root {
+  --vt-c-lightest: #fff9dd;
+  --vt-c-medium: #ffd600;
+  --vt-c-medium-dark: #eec201;
+  --vt-c-dark: #e0b700;
+  --vt-c-darkest: #4c4214;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  --vt-c-highlight: #990000;
+
+  --vt-c-base-light: #ffffff;
+  --vt-c-base-dark: #000000;
+
+  --vt-c-dga: #0059bf;
+  --vt-c-dia: #fc0;
+  --vt-c-dba: #001d66;
+  --vt-c-sh: #900000;
+  --vt-c-galleries: #263238;
+  --vt-c-dca: #6b612b;
+  --vt-c-exhibitions: #7f01d4;
+  --vt-c-explore: #006950;
+  --vt-c-mwnf: #001d66;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+/* semantic variables for this project */
+:root {
+  --header-bg: var(--vt-c-medium-dark);
+  --nav-bg: var(--vt-c-medium);
+  --nav-alt-bg: var(--vt-c-dark);
+  --footer-bg: var(--vt-c-dark);
+
+  --header-text: var(--vt-c-darkest);
+  --nav-text: var(--vt-c-darkest);
+  --nav-active: var(--vt-c-darkest);
+  --footer-text: var(--vt-c-darkest);
+  --text: var(--vt-c-base-dark);
+  --link: var(--vt-c-darkest);
+  --link-hover: var(--vt-c-highlight);
+
+  --text-light: var(--vt-c-base-light);
+  --text-dark: var(--vt-c-base-dark);
+
+  --page-bg: var(--vt-c-lightest);
+  --content-bg: var(--vt-c-base-light);
+  --section-bg: var(--vt-c-base-light);
+
+  --border: var(--vt-c-darkest);
+
+  --dga: var(--vt-c-dga);
+  --dia: var(--vt-c-dia);
+  --dba: var(--vt-c-dba);
+  --sh: var(--vt-c-sh);
+  --galleries: var(--vt-c-galleries);
+  --dca: var(--vt-c-dca);
+  --exhibitions: var(--vt-c-exhibitions);
+  --explore: var(--vt-c-explore);
+  --mwnf: var(--vt-c-mwnf);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  color: var(--text);
+  background: var(--page-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
