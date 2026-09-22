@@ -1,25 +1,27 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import { createRequire } from 'module'
+import { dirname } from 'path'
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueDevTools(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+export default defineConfig(() => {
+  const dataPackage = process.env.DATA_PACKAGE || '@metanull/islamicart-data'
+
+  const require = createRequire(import.meta.url)
+  let dataPackageDir
+  try {
+    dataPackageDir = dirname(require.resolve(`${dataPackage}/package.json`))
+  } catch {
+    throw new Error(
+      `Data package "${dataPackage}" is not installed.\n` +
+      `Run: npm install\n` +
+      `Or set DATA_PACKAGE in .env to the correct package name.`
+    )
+  }
+
+  return {
+    plugins: [vue()],
+    resolve: {
+      alias: { '@inventory-data': dataPackageDir },
     },
-  },
-  server: {
-    // See compose.yml: only needed for hot reload inside Docker on hosts
-    // where filesystem change events don't reach the container reliably.
-    watch: {
-      usePolling: process.env.VITE_USE_POLLING === 'true',
-    },
-  },
+  }
 })

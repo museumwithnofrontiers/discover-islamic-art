@@ -1,0 +1,30 @@
+@import "./main.css";
+
+.project-dga {
+  background-color: var(--dga);
+}
+.project-dia {
+  background-color: var(--dia);
+}
+.project-dba {
+  color: var(--text-light);
+  background-color: var(--dba);
+}
+.project-sh {
+  background-color: var(--sh);
+}
+.project-galleries {
+  background-color: var(--galleries);
+}
+.project-dca {
+  background-color: var(--dca);
+}
+.project-exhibitions {
+  background-color: var(--exhibitions);
+}
+.project-explore {
+  background-color: var(--explore);
+}
+.project-mwnf {
+  background-color: var(--mwnf);
+}
