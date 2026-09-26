@@ -54,7 +54,6 @@
                       name: 'partner-profile',
                       params: {
                         id: partner.id,
-                        // language: partner.languageId,
                       },
                     }"
                   >
@@ -68,33 +67,22 @@
                   :class="setBackgroundColorByProject(partner.project_ids[0])"
                 >
                   {{ projectTitle(partner.project_ids[0]) }}
-                  <!-- Spaces inside spans are intentional -->
-                  <span class="partner-status" v-if="partner.isPartner === 1">
-                    Partner</span
-                  >
-                  <span
-                    class="partner-status"
-                    v-else-if="partner.level === 'partner'"
-                  >
+                  <span class="partner-status" v-if="partner.level === 'partner'">
                     Partner
                   </span>
                   <span class="partner-status" v-else> Affiliate</span>
                 </div>
                 <div class="partner-links">
-                  <!-- <router-link
+                  <router-link
                     class="partner-profile"
                     :to="{
-                      name: 'partner',
+                      name: 'partner-profile',
                       params: {
-                        database: partner.projectId,
-                        country: partner.countryId,
-                        id: partner.partnerId,
-                        language: partner.languageId,
+                        id: partner.id,
                       },
-                    }"
-                    > -->
-                  Read more
-                  <!-- </router-link> -->
+                    }">
+                    Read more
+                  </router-link>
                   <!-- <div class="partner-link-divider" v-if="partner.hasObjects"> -->
                   <div class="partner-link-divider">|</div>
                   <!-- <router-link
@@ -135,63 +123,17 @@ import { setBackgroundColorByProject } from "../composables/utilities.js";
 const route = useRoute();
 const { partners, countryLabel, partnerLabel } = useInventoryData();
 
-const filterType = computed(() =>
-  route.query.type === "institution" ? "institution" : "museum",
-);
-const otherType = computed(() =>
-  filterType.value === "museum" ? "institution" : "museum",
-);
-const typeLabel = computed(() =>
-  filterType.value === "museum" ? "Museums" : "Institutions",
-);
-const otherTypeLabel = computed(() =>
-  otherType.value === "museum" ? "Partner Museums" : "Partner Institutions",
-);
-
-// 'ISL' (Discover Islamic Art, pm_partner_list.php) and 'EPM' (Explore Islamic Art
-// Collections, pm_partner_list_eiac.php) are two entirely separate curated lists in
-// legacy — never merged into one, unlike Permanent Collection/Database.
-const project = computed(() => (route.query.project === "EPM" ? "EPM" : "ISL"));
-const projectLabel = computed(() =>
-  project.value === "EPM"
-    ? "Explore Islamic Art Collections"
-    : "Discover Islamic Art",
-);
-
 const countryOrder = ref("alpha");
 const changeCountryOrder = () => {
   countryOrder.value = countryOrder.value === "alpha" ? "reverse" : "alpha";
 };
-// Associated tiers are nested under the main "Partners" list per country,
-// mirroring the legacy pm_partner_list.php accordion (level is only present
-// once the exporter's partner-hierarchy join has been re-published; a
-// partner without a level is treated as a main partner).
+
 const groupedByCountry = computed(() => {
-  // const byType = partners.value.filter(p => p.type === filterType.value && p.project_ids?.includes(project.value))
-
-  // const countries = new Map()
-  // for (const p of byType) {
-  //   const key = p.country_id ?? ''
-  //   if (!countries.has(key)) countries.set(key, { main: [], associated: [] })
-  //   const bucket = countries.get(key)
-  //   // if (p.level === 'associated_partner' || p.level === 'minor_contributor') {
-  //   //   bucket.associated.push(p)
-  //   // } else {
-  //   //   bucket.main.push(p)
-  //   // }
-  //   bucket.main.push(p)
-  // }
-
   const countries = new Map();
   for (const p of partners.value) {
     const key = p.country_id ?? "";
     if (!countries.has(key)) countries.set(key, { main: [], associated: [] });
     const bucket = countries.get(key);
-    // if (p.level === 'associated_partner' || p.level === 'minor_contributor') {
-    //   bucket.associated.push(p)
-    // } else {
-    //   bucket.main.push(p)
-    // }
     bucket.main.push(p);
   }
 
@@ -215,13 +157,6 @@ const groupedByCountry = computed(() => {
     });
 });
 
-const totalCount = computed(() =>
-  groupedByCountry.value.reduce(
-    (sum, g) => sum + g.main.length + g.associated.length,
-    0,
-  ),
-);
-
 // reusable?
 function projectTitle(code) {
   switch (code) {
@@ -233,148 +168,6 @@ function projectTitle(code) {
       return "";
   }
 }
-
-function partnerLink(partner) {
-  return { path: `/partner/${encodeURIComponent(partner.id)}` };
-}
-// // import { loadLocaleMessages } from "../i18n.js";
-// // import LoaderComponent from "./LoaderComponent.vue";
-// export default {
-//   name: "PartnersPage",
-//   // components: {
-//   //   LoaderComponent: LoaderComponent,
-//   // },
-//   data() {
-//     return {
-//       dxaFull: process.env.VUE_APP_DXA_FULL,
-//       dxaMaterial: process.env.VUE_APP_DXA_MATERIAL,
-//       loaded: false,
-//       partners: [],
-//       alphaOrder: "a-z",
-//       // Partners, A - Z
-//       sortedPartners: [],
-//       // Partners, Z - A
-//       reversedPartners: [],
-//       // Currently displaying Partners
-//       displayPartners: [],
-//       urls: {
-//         portal: process.env.VUE_APP_PORTAL_URL,
-//         baroqueArt: process.env.VUE_APP_BAROQUE_ART_URL,
-//         islamicArt: process.env.VUE_APP_ISLAMIC_ART_URL,
-//         sharingHistory: process.env.VUE_APP_SHARING_HISTORY_URL,
-//         galleries: process.env.VUE_APP_GALLERIES_URL,
-//         images: process.env.VUE_APP_IMAGES_URL,
-//       },
-//       emails: {
-//         contactUs: process.env.VUE_APP_CONTACT_US_EMAIL,
-//       },
-//     };
-//   },
-//   methods: {
-//     getPartners: function () {
-//       if (!this.$global.partners) {
-//         return axios({
-//           method: "GET",
-//           url: `${process.env.VUE_APP_DXA_ENDPOINT}/partners?hash=${process.env.VUE_APP_API_HASH}`,
-//         }).then(
-//           (result) => {
-//             this.$global.partners = result.data;
-//             this.partners = result.data;
-//             this.setPartnerArrays();
-//             this.displayPartners = this.sortedPartners;
-//             this.loaded = true;
-//           },
-//           (error) => {
-//             this.$router.replace({ name: "error" });
-//             console.error(error);
-//           }
-//         );
-//       } else {
-//         this.partners = this.$global.partners;
-//         this.setPartnerArrays();
-//         this.displayPartners = this.sortedPartners;
-//         this.loaded = true;
-//       }
-//     },
-//     // Sort Partners and save to data
-//     setPartnerArrays: function () {
-//       let data = this.partners;
-//       let countries = {};
-//       for (let i = 0; i < data.length; i++) {
-//         let country = data[i].countryName;
-//         if (country in countries) {
-//           countries[country].push(data[i]);
-//         } else {
-//           countries[country] = [data[i]];
-//         }
-//       }
-//       let array = this.arrayFromObject(countries);
-//       for (let j = 0; j < array.length; j++) {
-//         array[j].sort(function (a, b) {
-//           let partnerA = a.partnerName.toUpperCase();
-//           let partnerB = b.partnerName.toUpperCase();
-//           if (partnerA < partnerB) {
-//             return -1;
-//           }
-//           if (partnerA > partnerB) {
-//             return 1;
-//           }
-//           let projectA = a.projectName.toUpperCase();
-//           let projectB = b.projectName.toUpperCase();
-//           if (partnerA === partnerB) {
-//             return projectA < projectB ? -1 : 1;
-//           }
-//         });
-//       }
-
-//       this.sortedPartners = array;
-//       this.reversedPartners = array.slice().reverse();
-//     },
-//     arrayFromObject: function (object) {
-//       let array = [];
-//       for (let i in object) {
-//         array.push(object[i]);
-//       }
-//       return array;
-//     },
-//     // Toggle alphabetical order and displaying Partner array
-//     changeAlphaOrder: function (order) {
-//       if (order === "a-z") {
-//         this.alphaOrder = "z-a";
-//         this.displayPartners = this.reversedPartners;
-//       } else if (order === "z-a") {
-//         this.alphaOrder = "a-z";
-//         this.displayPartners = this.sortedPartners;
-//       }
-//     },
-//     backgroundColor: function (project, isExhibition) {
-//       return {
-//         DGA: project === "DGA",
-//         ISLandEPM: project === "ISL" || project === "EPM",
-//         AWE: project === "AWE",
-//         DBA: project === "BAR",
-//         Galleries: project === "GALLERIES",
-//         DCA: project === "DCA",
-//         EXH: isExhibition,
-//       };
-//     },
-//     // Add a separating horizontal line between Partners
-//     // Used for applying conditional class
-//     applyBorder: function (index, array) {
-//       if (index === array.length - 1) {
-//         return false;
-//       } else {
-//         return true;
-//       }
-//     },
-//   },
-//   created() {
-//     this.getPartners();
-//   },
-//   mounted() {
-//     loadLocaleMessages("en");
-//   }
-// };
 </script>
 
 <style>
@@ -511,34 +304,6 @@ function partnerLink(partner) {
 .partner-status {
   font-style: normal;
 }
-/*.DGA {
-  background-color: $dga-blue;
-  color: $light-text;
-}
-.ISLandEPM {
-  background-color: $dia-yellow;
-  color: black;
-}
-.AWE {
-  background-color: $sh-red;
-  color: $light-text;
-}
-.DBA {
-  background-color: $dba-blue;
-  color: $light-text;
-}
-.Galleries {
-  background-color: $g-grey;
-  color: $light-text;
-}
-.DCA {
-  background-color: $dca-tan;
-  color: $light-text;
-}
-.EXH {
-  background-color: $exhibitions-color;
-  color: white;
-}*/
 .partner-links {
   display: flex;
   align-items: center;

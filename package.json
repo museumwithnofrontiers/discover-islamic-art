@@ -16,13 +16,13 @@
     "@fortawesome/free-regular-svg-icons": "^7.3.1",
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@fortawesome/vue-fontawesome": "^3.3.3",
+    "@museumwnf/islamicart-data": "^1.0.46",
     "marked": "^18.0.5",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@metanull/islamicart-data": "^1.0.22",
     "@vitejs/plugin-vue": "^6.0.8",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",

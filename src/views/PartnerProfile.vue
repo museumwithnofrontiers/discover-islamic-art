@@ -24,8 +24,7 @@
       <div id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
-          <span v-if="text.city">{{ text.city }}, </span
-          >{{ partner.country_id }} (placeholder)
+          <span v-if="text.city">{{ text.city }}, </span>{{ partner.country_id }} (placeholder)
         </p>
 
         <!-- "Links" to show different categories of information -->
@@ -55,7 +54,7 @@
                 <a
                   id="partner-home"
                   v-if="text.website"
-                  :href="sanitizedURL"
+                  :href="text.website"
                   target="_blank"
                 >
                   <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
@@ -87,7 +86,7 @@
           <!-- Partner photos and thumbnails -->
           <div class="profile-photo-container" v-if="partner.images.length">
             <div class="profile-photo" @click="showLightbox = true">
-              <!-- <ZoomComponent :img-normal="currentPhoto"></ZoomComponent> -->
+               <ZoomComponent :img-normal="currentPhoto"></ZoomComponent>
             </div>
             <div id="profile-thumbnail-container">
               <div
@@ -163,9 +162,7 @@
                 </p> -->
               <!-- <p v-if="info.title">{{ info.title }}</p> -->
               <p id="partner-url" v-if="partner.website">
-                <a :href="sanitizedURL" target="_blank">{{
-                  partner.website
-                }}</a>
+                <a :href="partner.website" target="_blank">{{ partner.website }}</a>
               </p>
               <div>
                 <!-- Partner contact information (may be more than one person) -->
@@ -198,35 +195,26 @@
             </div>
           </div>
         </div>
-
-        <!-- Show label for map if there is map data available -->
-        <!-- Actual container for map is below -->
-        <!-- <p id="profile-map-label" v-if="showMap">Museum on Google Maps</p>
-            <p id="profile-no-map" v-else></p> -->
       </div>
     </div>
-
-    <!-- Contains the Google Map for Partner location -->
-    <!-- <div id="partner-profile-map" v-if="showMap"></div> -->
   </div>
 
   <!-- Map -->
-  <section v-if="mapEmbedUrl" class="content-section">
-    <h2 class="content-section-heading">map placeholder</h2>
+  <section v-if="mapEmbedUrl" class="content-section profile-map-label">
+    <h2 class="content-section-heading">Museum on OpenStreetMap</h2>
     <!-- <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" :title="$t('partner.map.onTheMap')" /> -->
-    <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" />
+    <iframe class="map-frame partner-profile-map" :src="mapEmbedUrl" loading="lazy" />
   </section>
 </template>
 
 <script setup>
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-// import { useI18n } from '@metanull/viewer-core'
 import { useInventoryData } from "../composables/data.js";
+import ZoomComponent from "../components/ZoomComponent.vue";
 
 const route = useRoute();
 const router = useRouter();
-// const { locale, t } = useI18n()
 const {
   availableLangs,
   countryLabel,
@@ -252,18 +240,15 @@ const partner = computed(
 const activeLang = defaultLang.value;
 // watch(activeLang, lang => loadTranslations('partners', lang), { immediate: true })
 
-// The partner's own curatorial text, in the active content language. Kept
-// clear of `t`, which is this website's interface texts.
-// const text = computed(() => tr('partners', partner.value?.id, activeLang.value))
+// The partner's own curatorial text, in the active content language.
 const text = computed(() =>
   getTranslation(defaultLang, "partners", decodeURIComponent(route.params.id)),
 );
 
 const setShowingInfo = ref("description");
-const currentPhoto = ref("");
+const currentPhoto = ref(partner.value.images[0].url);
 const showLightbox = ref(false);
 const rightToLeft = ref(false);
-// const showMap = ref(true)
 
 // ── Related items (View Objects / View Monuments) ────────────────────────
 
