@@ -58,15 +58,15 @@
                     }"
                   >
                     <p class="partner-profile">
-                      {{ projects[partner.project_uuids[0]].name["en"] }}
+                      {{ partnerLabel(partner.id) }}
                     </p>
                   </router-link>
                 </div>
                 <div
                   class="partner-project"
-                  :class="setBackgroundColorByProject(partner.project_uuids[0])"
+                  :class="setBackgroundColorByProject(projectID(partner))"
                 >
-                  {{ projects[partner.project_uuids[0]].name["en"] }}
+                  {{ projects[projectID(partner)].name["en"] }}
                   <span class="partner-status" v-if="partner.level === 'partner'">
                     Partner
                   </span>
@@ -168,6 +168,11 @@ function projectTitle(code) {
       return "";
   }
 }
+
+function projectID(p) {
+  return p.project_uuids[0];
+}
+
 </script>
 
 <style>
