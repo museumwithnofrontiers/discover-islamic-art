@@ -24,7 +24,8 @@
       <div id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
-          <span v-if="text.city">{{ text.city }}, </span>{{ partner.country_id }} (placeholder)
+          <span v-if="text.city">{{ text.city }}, </span
+          >{{ partner.country_id }} (placeholder)
         </p>
 
         <!-- "Links" to show different categories of information -->
@@ -86,7 +87,7 @@
           <!-- Partner photos and thumbnails -->
           <div class="profile-photo-container" v-if="partner.images.length">
             <div class="profile-photo" @click="showLightbox = true">
-               <ZoomComponent :img-normal="currentPhoto"></ZoomComponent>
+              <ZoomComponent :img-normal="currentPhoto"></ZoomComponent>
             </div>
             <div id="profile-thumbnail-container">
               <div
@@ -162,7 +163,9 @@
                 </p> -->
               <!-- <p v-if="info.title">{{ info.title }}</p> -->
               <p id="partner-url" v-if="partner.website">
-                <a :href="partner.website" target="_blank">{{ partner.website }}</a>
+                <a :href="partner.website" target="_blank">{{
+                  partner.website
+                }}</a>
               </p>
               <div>
                 <!-- Partner contact information (may be more than one person) -->
@@ -203,7 +206,11 @@
   <section v-if="mapEmbedUrl" class="content-section profile-map-label">
     <h2 class="content-section-heading">Museum on OpenStreetMap</h2>
     <!-- <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" :title="$t('partner.map.onTheMap')" /> -->
-    <iframe class="map-frame partner-profile-map" :src="mapEmbedUrl" loading="lazy" />
+    <iframe
+      class="map-frame partner-profile-map"
+      :src="mapEmbedUrl"
+      loading="lazy"
+    />
   </section>
 </template>
 

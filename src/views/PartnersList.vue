@@ -67,7 +67,10 @@
                   :class="setBackgroundColorByProject(projectID(partner))"
                 >
                   {{ projects[projectID(partner)].name["en"] }}
-                  <span class="partner-status" v-if="partner.level === 'partner'">
+                  <span
+                    class="partner-status"
+                    v-if="partner.level === 'partner'"
+                  >
                     Partner
                   </span>
                   <span class="partner-status" v-else> Affiliate</span>
@@ -80,7 +83,8 @@
                       params: {
                         id: partner.id,
                       },
-                    }">
+                    }"
+                  >
                     Read more
                   </router-link>
                   <!-- <div class="partner-link-divider" v-if="partner.hasObjects"> -->
@@ -172,7 +176,6 @@ function projectTitle(code) {
 function projectID(p) {
   return p.project_uuids[0];
 }
-
 </script>
 
 <style>
