@@ -19,6 +19,7 @@ const availableLangs = ref(manifestData.languages ?? []);
 const defaultLang = (manifestData.languages ?? []).includes("en")
   ? "en"
   : ((manifestData.languages ?? [])[0] ?? "en");
+const projects = ref(manifestData.projects);
 
 const translationsCache = ref({});
 const translations = ref({});
@@ -101,6 +102,7 @@ export function useInventoryData() {
     collections,
     availableLangs,
     defaultLang,
+    projects,
     translations,
     translationsCache,
     loadTranslations,

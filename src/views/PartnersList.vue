@@ -58,15 +58,15 @@
                     }"
                   >
                     <p class="partner-profile">
-                      {{ partnerLabel(partner.id) }}
+                      {{ projects[partner.project_uuids[0]].name["en"] }}
                     </p>
                   </router-link>
                 </div>
                 <div
                   class="partner-project"
-                  :class="setBackgroundColorByProject(partner.project_ids[0])"
+                  :class="setBackgroundColorByProject(partner.project_uuids[0])"
                 >
-                  {{ projectTitle(partner.project_ids[0]) }}
+                  {{ projects[partner.project_uuids[0]].name["en"] }}
                   <span class="partner-status" v-if="partner.level === 'partner'">
                     Partner
                   </span>
@@ -121,7 +121,7 @@ import { useInventoryData } from "../composables/data.js";
 import { setBackgroundColorByProject } from "../composables/utilities.js";
 
 const route = useRoute();
-const { partners, countryLabel, partnerLabel } = useInventoryData();
+const { partners, projects, countryLabel, partnerLabel } = useInventoryData();
 
 const countryOrder = ref("alpha");
 const changeCountryOrder = () => {
