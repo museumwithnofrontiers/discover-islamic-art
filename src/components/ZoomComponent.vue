@@ -115,8 +115,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 .zoom-on-hover {
   width: 100%;

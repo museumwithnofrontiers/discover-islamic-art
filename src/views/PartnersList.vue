@@ -64,10 +64,13 @@
                 </div>
                 <div
                   class="partner-project"
-                  :class="setBackgroundColorByProject(partner.project_ids[0])"
+                  :class="setBackgroundColorByProject(projectID(partner))"
                 >
-                  {{ projectTitle(partner.project_ids[0]) }}
-                  <span class="partner-status" v-if="partner.level === 'partner'">
+                  {{ projects[projectID(partner)].name["en"] }}
+                  <span
+                    class="partner-status"
+                    v-if="partner.level === 'partner'"
+                  >
                     Partner
                   </span>
                   <span class="partner-status" v-else> Affiliate</span>
@@ -80,7 +83,8 @@
                       params: {
                         id: partner.id,
                       },
-                    }">
+                    }"
+                  >
                     Read more
                   </router-link>
                   <!-- <div class="partner-link-divider" v-if="partner.hasObjects"> -->
@@ -121,7 +125,7 @@ import { useInventoryData } from "../composables/data.js";
 import { setBackgroundColorByProject } from "../composables/utilities.js";
 
 const route = useRoute();
-const { partners, countryLabel, partnerLabel } = useInventoryData();
+const { partners, projects, countryLabel, partnerLabel } = useInventoryData();
 
 const countryOrder = ref("alpha");
 const changeCountryOrder = () => {
@@ -167,6 +171,10 @@ function projectTitle(code) {
     default:
       return "";
   }
+}
+
+function projectID(p) {
+  return p.project_uuids[0];
 }
 </script>
 
