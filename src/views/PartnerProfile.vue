@@ -169,22 +169,21 @@
               </p>
               <div>
                 <!-- Partner contact information (may be more than one person) -->
-                <div class="contact-person">
+                <div class="contact-person" v-for="contact in partner.contact_persons">
                   <p
                     class="contact-title"
-                    v-if="partner.contact_person_1.title"
+                    v-if="contact.title"
                   >
-                    {{ partner.contact_person_1.title }}
+                    {{ contact.title }}
                   </p>
-                  <p v-if="partner.contact_person_1.name">
-                    {{ partner.contact_person_1.name }}
+                  <p v-if="contact.name">
+                    {{ contact.name }}
                   </p>
-                  <!-- missing information? -->
-                  <!-- <p v-if="person.phone">T {{ person.phone }}</p>
-                    <p v-if="person.fax">F {{ person.fax }}</p>
-                    <p v-if="person.mail">
-                        <a :href="'mailto:' + person.mail">{{ person.mail }}</a>
-                    </p> -->
+                   <p v-if="contact.phone">T {{ contact.phone }}</p>
+                    <p v-if="contact.fax">F {{ contact.fax }}</p>
+                    <p v-if="contact.mail">
+                        <a :href="'mailto:' + contact.mail">{{ contact.mail }}</a>
+                    </p>
                 </div>
               </div>
             </div>
@@ -323,21 +322,13 @@ const hasContactInfo = computed(
       text.value.phone ||
       text.value.email ||
       text.value.website ||
-      partner.value?.additional_urls?.length
+      partner.value?.contact_persons.length
     ),
 );
 
 function normalizeUrl(url) {
   return url.startsWith("http") ? url : `http://${url}`;
 }
-
-const contactPersons = computed(() => {
-  if (!partner.value) return [];
-  return [
-    partner.value.contact_person_1,
-    partner.value.contact_person_2,
-  ].filter((cp) => cp && (cp.name || cp.title));
-});
 
 // ── Map (OpenStreetMap embed — no API key required) ───────────────────────
 
