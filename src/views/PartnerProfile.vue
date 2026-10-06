@@ -25,7 +25,7 @@
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
-          >{{ partner.country_id }} (placeholder)
+          >{{ countryLabel(partner.country_id) }}
         </p>
 
         <!-- "Links" to show different categories of information -->

@@ -58,7 +58,7 @@
                     }"
                   >
                     <p class="partner-profile">
-                      {{ partnerLabel(partner.id) }}
+                      {{ partnerLabel(partner.id) }}, <span>{{ locationName(partner.id) }}</span>
                     </p>
                   </router-link>
                 </div>
@@ -125,7 +125,17 @@ import { useInventoryData } from "../composables/data.js";
 import { setBackgroundColorByProject } from "../composables/utilities.js";
 
 const route = useRoute();
-const { partners, projects, countryLabel, partnerLabel } = useInventoryData();
+const {
+  partners,
+  projects,
+  countryLabel,
+  partnerLabel,
+  defaultLang,
+  translations,
+  translationsCache,
+  loadTranslations,
+  getTranslation,
+} = useInventoryData();
 
 const countryOrder = ref("alpha");
 const changeCountryOrder = () => {
@@ -160,6 +170,11 @@ const groupedByCountry = computed(() => {
       }
     });
 });
+
+function locationName(id) {
+  let translation = getTranslation(defaultLang, "partners", decodeURIComponent(id));
+  return translation?.city ?? '';
+}
 
 // reusable?
 function projectTitle(code) {
