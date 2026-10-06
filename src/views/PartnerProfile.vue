@@ -156,11 +156,10 @@
               <p id="address-header">Address(es)</p>
               <p v-html="text.address"></p>
               <p v-if="text.phone">T {{ text.phone }}</p>
-              <!-- missing information from package? -->
-              <!-- <p v-if="info.fax">F {{ info.fax }}</p> -->
-              <!-- <p v-if="info.email">
-                    <a :href="'mailto:' + info.email">{{ info.email }}</a>
-                </p> -->
+              <p v-if="text.fax">F {{ text.fax }}</p>
+              <p v-if="text.email">
+                <a :href="'mailto:' + text.email">{{ text.email }}</a>
+              </p>
               <!-- <p v-if="info.title">{{ info.title }}</p> -->
               <p id="partner-url" v-if="partner.website">
                 <a :href="partner.website" target="_blank">{{
