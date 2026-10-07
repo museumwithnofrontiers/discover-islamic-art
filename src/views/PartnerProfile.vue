@@ -7,17 +7,17 @@
         :class="{
           'profile-language-selected': defaultLang,
         }"
-        v-for="language in availableLangs"
+        v-for="language in partner.languages"
         :key="language"
         @click="setLanguage(language)"
       >
-        {{ availableLangs[language] }}
+        {{ language }}
       </button>
     </div>
 
     <div id="partner-profile-container">
-      <button @click="$router.go(-1)">
-        <font-awesome-icon :icon="['fas', 'reply']" />Back
+      <button class="back-button" @click="$router.go(-1)">
+        <font-awesome-icon :icon="['fas', 'reply']" /> Back
       </button>
 
       <!-- <LoaderComponent /> -->
@@ -25,7 +25,7 @@
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
-          >{{ partner.country_id }} (placeholder)
+          >{{ countryLabel(partner.country_id) }}
         </p>
 
         <!-- "Links" to show different categories of information -->
@@ -79,7 +79,7 @@
                 }"
                 >View Objects
                 </router-link> -->
-            <p class="partner-links-background">View Objects (Placeholder)</p>
+            <span class="partner-links-background">View Objects</span>
           </div>
         </div>
 
@@ -156,11 +156,10 @@
               <p id="address-header">Address(es)</p>
               <p v-html="text.address"></p>
               <p v-if="text.phone">T {{ text.phone }}</p>
-              <!-- missing information from package? -->
-              <!-- <p v-if="info.fax">F {{ info.fax }}</p> -->
-              <!-- <p v-if="info.email">
-                    <a :href="'mailto:' + info.email">{{ info.email }}</a>
-                </p> -->
+              <p v-if="text.fax">F {{ text.fax }}</p>
+              <p v-if="text.email">
+                <a :href="'mailto:' + text.email">{{ text.email }}</a>
+              </p>
               <!-- <p v-if="info.title">{{ info.title }}</p> -->
               <p id="partner-url" v-if="partner.website">
                 <a :href="partner.website" target="_blank">{{
@@ -169,22 +168,21 @@
               </p>
               <div>
                 <!-- Partner contact information (may be more than one person) -->
-                <div class="contact-person">
-                  <p
-                    class="contact-title"
-                    v-if="partner.contact_person_1.title"
-                  >
-                    {{ partner.contact_person_1.title }}
+                <div
+                  class="contact-person"
+                  v-for="contact in partner.contact_persons"
+                >
+                  <p class="contact-title" v-if="contact.title">
+                    {{ contact.title }}
                   </p>
-                  <p v-if="partner.contact_person_1.name">
-                    {{ partner.contact_person_1.name }}
+                  <p v-if="contact.name">
+                    {{ contact.name }}
                   </p>
-                  <!-- missing information? -->
-                  <!-- <p v-if="person.phone">T {{ person.phone }}</p>
-                    <p v-if="person.fax">F {{ person.fax }}</p>
-                    <p v-if="person.mail">
-                        <a :href="'mailto:' + person.mail">{{ person.mail }}</a>
-                    </p> -->
+                  <p v-if="contact.phone">T {{ contact.phone }}</p>
+                  <p v-if="contact.fax">F {{ contact.fax }}</p>
+                  <p v-if="contact.mail">
+                    <a :href="'mailto:' + contact.mail">{{ contact.mail }}</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -203,8 +201,8 @@
   </div>
 
   <!-- Map -->
-  <section v-if="mapEmbedUrl" class="content-section profile-map-label">
-    <h2 class="content-section-heading">Museum on OpenStreetMap</h2>
+  <section v-if="mapEmbedUrl" class="map-section">
+    <p class="profile-map-label">Museum on OpenStreetMap</p>
     <!-- <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" :title="$t('partner.map.onTheMap')" /> -->
     <iframe
       class="map-frame partner-profile-map"
@@ -292,26 +290,26 @@ function setRightToLeft(lang) {
 }
 
 function slideshow(clicked) {
-  let ssUrls = [];
-  for (let i = 0; i < this.info.pictures.length; i++) {
-    ssUrls.push(this.info.pictures[i].L);
+  let imgURLs = [];
+  for (let i = 0; i < partner.value.images.length; i++) {
+    imgURLs.push(partner.value.images[i].url);
   }
-  let index = ssUrls.indexOf(this.currentPhoto);
+  let index = imgURLs.indexOf(this.currentPhoto);
   let newIndex;
   if (clicked === "right") {
-    if (index === ssUrls.length - 1) {
+    if (index === imgURLs.length - 1) {
       newIndex = 0;
     } else {
       newIndex = index + 1;
     }
   } else if (clicked === "left") {
     if (index === 0) {
-      newIndex = ssUrls.length - 1;
+      newIndex = imgURLs.length - 1;
     } else {
       newIndex = index - 1;
     }
   }
-  this.currentPhoto = ssUrls[newIndex];
+  this.currentPhoto = imgURLs[newIndex];
 }
 
 // ── Contact ────────────────────────────────────────────────────────────
@@ -323,21 +321,13 @@ const hasContactInfo = computed(
       text.value.phone ||
       text.value.email ||
       text.value.website ||
-      partner.value?.additional_urls?.length
+      partner.value?.contact_persons.length
     ),
 );
 
 function normalizeUrl(url) {
   return url.startsWith("http") ? url : `http://${url}`;
 }
-
-const contactPersons = computed(() => {
-  if (!partner.value) return [];
-  return [
-    partner.value.contact_person_1,
-    partner.value.contact_person_2,
-  ].filter((cp) => cp && (cp.name || cp.title));
-});
 
 // ── Map (OpenStreetMap embed — no API key required) ───────────────────────
 
@@ -562,7 +552,7 @@ function back() {
   top: 0;
   left: 0;
   z-index: 200;
-  background-color: rgba(black, 0.9);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 #lightbox {
   height: 90%;
@@ -632,9 +622,12 @@ function back() {
   padding-bottom: 10px;
 }
 
-#profile-map-label {
+.map-section {
+  background-color: var(--content-bg);
+}
+.profile-map-label {
   font-size: 110%;
-  padding: 30px 0 20px 0;
+  padding: 30px 50px 20px 50px;
 }
 #profile-no-map {
   margin-bottom: 100px;

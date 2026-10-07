@@ -61,7 +61,7 @@ function getTranslation(lang, category, id) {
   if (!translationsCache.value[lang]) {
     translationsCache.value[lang] = loadTranslations(lang);
   }
-  return translationsCache.value[lang][category][id];
+  return translationsCache.value[lang]?.[category]?.[id];
 }
 
 function itemLabel(item) {
