@@ -7,17 +7,17 @@
         :class="{
           'profile-language-selected': defaultLang,
         }"
-        v-for="language in availableLangs"
+        v-for="language in partner.languages"
         :key="language"
         @click="setLanguage(language)"
       >
-        {{ availableLangs[language] }}
+        {{ language }}
       </button>
     </div>
 
     <div id="partner-profile-container">
-      <button @click="$router.go(-1)">
-        <font-awesome-icon :icon="['fas', 'reply']" />Back
+      <button class="back-button" @click="$router.go(-1)">
+        <font-awesome-icon :icon="['fas', 'reply']" /> Back
       </button>
 
       <!-- <LoaderComponent /> -->
@@ -79,7 +79,7 @@
                 }"
                 >View Objects
                 </router-link> -->
-            <p class="partner-links-background">View Objects (Placeholder)</p>
+            <span class="partner-links-background">View Objects</span>
           </div>
         </div>
 
@@ -201,8 +201,8 @@
   </div>
 
   <!-- Map -->
-  <section v-if="mapEmbedUrl" class="content-section profile-map-label">
-    <h2 class="content-section-heading">Museum on OpenStreetMap</h2>
+  <section v-if="mapEmbedUrl" class="map-section">
+    <p class="profile-map-label">Museum on OpenStreetMap</p>
     <!-- <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" :title="$t('partner.map.onTheMap')" /> -->
     <iframe
       class="map-frame partner-profile-map"
@@ -290,26 +290,26 @@ function setRightToLeft(lang) {
 }
 
 function slideshow(clicked) {
-  let ssUrls = [];
-  for (let i = 0; i < this.info.pictures.length; i++) {
-    ssUrls.push(this.info.pictures[i].L);
+  let imgURLs = [];
+  for (let i = 0; i < partner.value.images.length; i++) {
+    imgURLs.push(partner.value.images[i].url);
   }
-  let index = ssUrls.indexOf(this.currentPhoto);
+  let index = imgURLs.indexOf(this.currentPhoto);
   let newIndex;
   if (clicked === "right") {
-    if (index === ssUrls.length - 1) {
+    if (index === imgURLs.length - 1) {
       newIndex = 0;
     } else {
       newIndex = index + 1;
     }
   } else if (clicked === "left") {
     if (index === 0) {
-      newIndex = ssUrls.length - 1;
+      newIndex = imgURLs.length - 1;
     } else {
       newIndex = index - 1;
     }
   }
-  this.currentPhoto = ssUrls[newIndex];
+  this.currentPhoto = imgURLs[newIndex];
 }
 
 // ── Contact ────────────────────────────────────────────────────────────
@@ -552,7 +552,7 @@ function back() {
   top: 0;
   left: 0;
   z-index: 200;
-  background-color: rgba(black, 0.9);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 #lightbox {
   height: 90%;
@@ -622,9 +622,12 @@ function back() {
   padding-bottom: 10px;
 }
 
-#profile-map-label {
+.map-section {
+  background-color: var(--content-bg);
+}
+.profile-map-label {
   font-size: 110%;
-  padding: 30px 0 20px 0;
+  padding: 30px 50px 20px 50px;
 }
 #profile-no-map {
   margin-bottom: 100px;
