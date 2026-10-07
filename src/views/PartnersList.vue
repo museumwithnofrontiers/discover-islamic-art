@@ -58,7 +58,8 @@
                     }"
                   >
                     <p class="partner-profile">
-                      {{ partnerLabel(partner.id) }}, <span>{{ locationName(partner.id) }}</span>
+                      {{ partnerLabel(partner.id) }},
+                      <span>{{ locationName(partner.id) }}</span>
                     </p>
                   </router-link>
                 </div>
@@ -172,8 +173,12 @@ const groupedByCountry = computed(() => {
 });
 
 function locationName(id) {
-  let translation = getTranslation(defaultLang, "partners", decodeURIComponent(id));
-  return translation?.city ?? '';
+  let translation = getTranslation(
+    defaultLang,
+    "partners",
+    decodeURIComponent(id),
+  );
+  return translation?.city ?? "";
 }
 
 // reusable?

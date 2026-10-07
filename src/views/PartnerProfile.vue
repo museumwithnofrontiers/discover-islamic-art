@@ -168,21 +168,21 @@
               </p>
               <div>
                 <!-- Partner contact information (may be more than one person) -->
-                <div class="contact-person" v-for="contact in partner.contact_persons">
-                  <p
-                    class="contact-title"
-                    v-if="contact.title"
-                  >
+                <div
+                  class="contact-person"
+                  v-for="contact in partner.contact_persons"
+                >
+                  <p class="contact-title" v-if="contact.title">
                     {{ contact.title }}
                   </p>
                   <p v-if="contact.name">
                     {{ contact.name }}
                   </p>
-                   <p v-if="contact.phone">T {{ contact.phone }}</p>
-                    <p v-if="contact.fax">F {{ contact.fax }}</p>
-                    <p v-if="contact.mail">
-                        <a :href="'mailto:' + contact.mail">{{ contact.mail }}</a>
-                    </p>
+                  <p v-if="contact.phone">T {{ contact.phone }}</p>
+                  <p v-if="contact.fax">F {{ contact.fax }}</p>
+                  <p v-if="contact.mail">
+                    <a :href="'mailto:' + contact.mail">{{ contact.mail }}</a>
+                  </p>
                 </div>
               </div>
             </div>
