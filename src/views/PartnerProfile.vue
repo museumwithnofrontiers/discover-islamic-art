@@ -305,7 +305,7 @@ function slideshow(clicked) {
   for (let i = 0; i < partner.value.images.length; i++) {
     imgURLs.push(partner.value.images[i].url);
   }
-  let index = imgURLs.indexOf(this.currentPhoto);
+  let index = imgURLs.indexOf(currentPhoto.value);
   let newIndex;
   if (clicked === "right") {
     if (index === imgURLs.length - 1) {
@@ -320,7 +320,7 @@ function slideshow(clicked) {
       newIndex = index - 1;
     }
   }
-  this.currentPhoto = imgURLs[newIndex];
+  currentPhoto.value = imgURLs[newIndex];
 }
 
 // ── Contact ────────────────────────────────────────────────────────────
