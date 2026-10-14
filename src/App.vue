@@ -32,10 +32,10 @@
         <RouterLink to="/dynasties" active-class="nav-active"
           >Islamic Dynasties</RouterLink
         >
-        <RouterLink to="/credits" active-class="nav-active"
-          >Credits</RouterLink
-        >
-        <a href="https://www.museumwnf.org/mycollection/index.php" active-class="nav-active"
+        <RouterLink to="/credits" active-class="nav-active">Credits</RouterLink>
+        <a
+          href="https://www.museumwnf.org/mycollection/index.php"
+          active-class="nav-active"
           >My Collection</a
         >
       </div>

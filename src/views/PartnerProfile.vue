@@ -24,7 +24,8 @@
       <div id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
-          <span v-if="text.city">{{ text.city }}, </span>{{ countryLabel(partner.country_id) }}
+          <span v-if="text.city">{{ text.city }}, </span
+          >{{ countryLabel(partner.country_id) }}
         </p>
 
         <!-- "Links" to show different categories of information -->
@@ -32,24 +33,28 @@
           <div id="partner-links-wrapper">
             <div id="partner-links" class="partner-links-background">
               <div>
-                <button @click="setShowingInfo = 'description'"
-                  :class="{ 'bold': setShowingInfo === 'description' }">
+                <button
+                  @click="setShowingInfo = 'description'"
+                  :class="{ bold: setShowingInfo === 'description' }"
+                >
                   About
                 </button>
                 <span class="partner-links-divider">|</span>
                 <button
                   @click="setShowingInfo = 'contact'"
                   v-if="hasContactInfo"
-                  :class="{ 'bold': setShowingInfo === 'contact' }"
+                  :class="{ bold: setShowingInfo === 'contact' }"
                 >
                   Contact
                 </button>
                 <span class="partner-links-divider" v-if="hasContactInfo"
                   >|</span
                 >
-                <button @click="setShowingInfo = 'logo'"
-                  :class="{ 'bold': setShowingInfo === 'logo' }">
-                    Logo
+                <button
+                  @click="setShowingInfo = 'logo'"
+                  :class="{ bold: setShowingInfo === 'logo' }"
+                >
+                  Logo
                 </button>
                 <span
                   class="partner-links-divider"

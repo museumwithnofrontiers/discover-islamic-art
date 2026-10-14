@@ -27,7 +27,18 @@
       </p> -->
         <!-- <p v-html="$i18n.t('galleryPartners')"></p> -->
         <p>
-          If you are interested in exploring the contributions of a specific institution, this page is the best place to start. Partners marked as "<span class="italic">Discover Islamic Art</span> Partner" or "Affiliate" participated in the first phase of the project, which focused on the Mediterranean context up to the end of the Ottoman Empire. The project was later expanded to include the wider Islamic world and contemporary Islamic art; partners marked as "<span class="italic">Explore Islamic Art Collections</span> Partner" joined during this later phase. New partners continue to join, regularly contributing new material to our database.
+          If you are interested in exploring the contributions of a specific
+          institution, this page is the best place to start. Partners marked as
+          "<span class="italic">Discover Islamic Art</span> Partner" or
+          "Affiliate" participated in the first phase of the project, which
+          focused on the Mediterranean context up to the end of the Ottoman
+          Empire. The project was later expanded to include the wider Islamic
+          world and contemporary Islamic art; partners marked as "<span
+            class="italic"
+            >Explore Islamic Art Collections</span
+          >
+          Partner" joined during this later phase. New partners continue to
+          join, regularly contributing new material to our database.
         </p>
       </div>
 
