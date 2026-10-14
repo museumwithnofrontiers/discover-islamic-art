@@ -24,8 +24,7 @@
       <div id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
-          <span v-if="text.city">{{ text.city }}, </span
-          >{{ countryLabel(partner.country_id) }}
+          <span v-if="text.city">{{ text.city }}, </span>{{ countryLabel(partner.country_id) }}
         </p>
 
         <!-- "Links" to show different categories of information -->
@@ -33,18 +32,25 @@
           <div id="partner-links-wrapper">
             <div id="partner-links" class="partner-links-background">
               <div>
-                <button @click="setShowingInfo = 'description'">About</button>
+                <button @click="setShowingInfo = 'description'"
+                  :class="{ 'bold': setShowingInfo === 'description' }">
+                  About
+                </button>
                 <span class="partner-links-divider">|</span>
                 <button
                   @click="setShowingInfo = 'contact'"
                   v-if="hasContactInfo"
+                  :class="{ 'bold': setShowingInfo === 'contact' }"
                 >
                   Contact
                 </button>
                 <span class="partner-links-divider" v-if="hasContactInfo"
                   >|</span
                 >
-                <button @click="setShowingInfo = 'logo'">Logo</button>
+                <button @click="setShowingInfo = 'logo'"
+                  :class="{ 'bold': setShowingInfo === 'logo' }">
+                    Logo
+                </button>
                 <span
                   class="partner-links-divider"
                   v-if="text.website && !lessThan599"
@@ -361,6 +367,10 @@ function back() {
 </style>
 
 <style scoped>
+.bold {
+  font-weight: bold;
+}
+
 #partner-profile-wrapper {
   width: 100%;
   background-color: white;
@@ -417,7 +427,7 @@ function back() {
   padding-top: 20px;
 }
 #partner-name {
-  font-size: 110%;
+  font-size: 20px;
 }
 #partner-location {
   font-style: italic;
@@ -450,6 +460,7 @@ function back() {
 .partner-links-background {
   background-color: var(--nav-bg);
   border-radius: 50px;
+  font-size: 16px;
   padding: 2px 12px;
 }
 #partner-links button {
@@ -457,6 +468,7 @@ function back() {
   background-color: var(--nav-bg);
   cursor: pointer;
   color: var(--text-dark);
+  font-size: 16px;
 }
 .partner-links-divider {
   margin: 0 10px;
@@ -591,6 +603,7 @@ function back() {
 #profile-info-container {
   width: 60%;
   padding-left: 50px;
+  white-space: pre-wrap;
 }
 #profile-info-container a {
   color: var(--text-dark);
