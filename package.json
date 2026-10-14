@@ -17,7 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@fortawesome/vue-fontawesome": "^3.3.3",
     "@museumwnf/islamicart-data": "^1.0.46",
-    "marked": "^18.0.5",
+    "marked": "^18.1.0",
     "vue": "^3.5.40",
     "vue-router": "^5.4.0"
   },
