@@ -11,32 +11,32 @@
 
     <nav class="site-nav">
       <div class="container nav-inner">
-        <RouterLink
-          to="/"
-          active-class="nav-active"
-          exact-active-class="nav-exact-active"
-          >Home</RouterLink
-        >
         <RouterLink to="/permanent-collection" active-class="nav-active"
           >Permanent Collection</RouterLink
         >
         <RouterLink to="/database" active-class="nav-active"
           >Database</RouterLink
         >
-        <RouterLink to="/timeline" active-class="nav-active"
-          >Timeline</RouterLink
-        >
-        <RouterLink to="/partners" active-class="nav-active"
-          >Partners</RouterLink
-        >
-        <RouterLink to="/dynasties" active-class="nav-active"
-          >Dynasties</RouterLink
+        <RouterLink to="/exhibitions" active-class="nav-active"
+          >Exhibitions</RouterLink
         >
         <RouterLink to="/artistic-introduction" active-class="nav-active"
           >Artistic Introduction</RouterLink
         >
-        <RouterLink to="/exhibitions" active-class="nav-active"
-          >Exhibitions</RouterLink
+        <RouterLink to="/partners" active-class="nav-active"
+          >Partners</RouterLink
+        >
+        <RouterLink to="/timeline" active-class="nav-active"
+          >Timeline</RouterLink
+        >
+        <RouterLink to="/dynasties" active-class="nav-active"
+          >Islamic Dynasties</RouterLink
+        >
+        <RouterLink to="/credits" active-class="nav-active">Credits</RouterLink>
+        <a
+          href="https://www.museumwnf.org/mycollection/index.php"
+          active-class="nav-active"
+          >My Collection</a
         >
       </div>
     </nav>
@@ -127,12 +127,13 @@ a:hover {
   align-items: center;
   width: 100%;
   padding: 4px 10px;
-  color: var(--nav-fg);
+  color: var(--nav-text);
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
   text-align: center;
+  text-transform: uppercase;
   transition:
     color 0.15s,
     background 0.15s;

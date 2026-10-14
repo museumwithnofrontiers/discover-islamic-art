@@ -27,8 +27,18 @@
       </p> -->
         <!-- <p v-html="$i18n.t('galleryPartners')"></p> -->
         <p>
-          If you are interested in learning about the contribution from a
-          specific institution, this page might be the best place to start.
+          If you are interested in exploring the contributions of a specific
+          institution, this page is the best place to start. Partners marked as
+          "<span class="italic">Discover Islamic Art</span> Partner" or
+          "Affiliate" participated in the first phase of the project, which
+          focused on the Mediterranean context up to the end of the Ottoman
+          Empire. The project was later expanded to include the wider Islamic
+          world and contemporary Islamic art; partners marked as "<span
+            class="italic"
+            >Explore Islamic Art Collections</span
+          >
+          Partner" joined during this later phase. New partners continue to
+          join, regularly contributing new material to our database.
         </p>
       </div>
 
@@ -246,6 +256,7 @@ function projectID(p) {
 
 #partners-list-description {
   width: 50%;
+  font-size: 20px;
   padding-top: 30px;
 }
 .italic {
@@ -265,7 +276,7 @@ function projectID(p) {
   margin-bottom: 30px;
 }
 .partners-country {
-  font-size: 160%;
+  font-size: 30px;
   font-weight: bold;
   background-color: var(--page-bg);
   padding: 5px 10px;
@@ -311,19 +322,19 @@ function projectID(p) {
   justify-content: center;
   justify-content: flex-start;
   width: 100%;
+  font-size: 20px;
 }
 .partner-name:hover {
   text-decoration: underline;
 }
 .partner-name p {
-  font-size: 120%;
   font-weight: bold;
 }
 .partner-name p span {
   font-weight: normal;
 }
 .partner-project {
-  font-size: 90%;
+  font-size: 16px;
   font-weight: bold;
   font-style: italic;
   border-radius: 10px;
@@ -336,6 +347,7 @@ function projectID(p) {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
 }
 .partner-link-divider {
   padding: 0 8px;
