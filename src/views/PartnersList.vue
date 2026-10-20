@@ -33,11 +33,11 @@
           "Affiliate" participated in the first phase of the project, which
           focused on the Mediterranean context up to the end of the Ottoman
           Empire. The project was later expanded to include the wider Islamic
-          world and contemporary Islamic art; partners marked as "<span
+          world and contemporary Islamic art; Partners marked as "<span
             class="italic"
             >Explore Islamic Art Collections</span
           >
-          Partner" joined during this later phase. New partners continue to
+          Partner" joined during this later phase. New Partners continue to
           join, regularly contributing new material to our database.
         </p>
       </div>

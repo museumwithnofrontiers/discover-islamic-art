@@ -5,13 +5,13 @@
       <button
         class="profile-languages-button"
         :class="{
-          'profile-language-selected': defaultLang,
+          'profile-language-selected': activeLang === language,
         }"
         v-for="language in partner.languages"
         :key="language"
-        @click="setLanguage(language)"
+        @click="activeLang = language"
       >
-        {{ language }}
+        {{ languageLabel(language) }}
       </button>
     </div>
 
@@ -234,6 +234,8 @@ const router = useRouter();
 const {
   availableLangs,
   countryLabel,
+  languageLabel,
+  languageCode,
   defaultLang,
   items,
   translations,
@@ -253,12 +255,11 @@ const partner = computed(
 // Follows the global site locale; falls back to the dataset default when the
 // locale has no partner translations.
 
-const activeLang = defaultLang.value;
-// watch(activeLang, lang => loadTranslations('partners', lang), { immediate: true })
+const activeLang = ref(defaultLang);
 
 // The partner's own curatorial text, in the active content language.
 const text = computed(() =>
-  getTranslation(defaultLang, "partners", decodeURIComponent(route.params.id)),
+  getTranslation(activeLang.value, "partners", decodeURIComponent(route.params.id)),
 );
 
 const setShowingInfo = ref("description");
