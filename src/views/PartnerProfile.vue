@@ -259,7 +259,11 @@ const activeLang = ref(defaultLang);
 
 // The partner's own curatorial text, in the active content language.
 const text = computed(() =>
-  getTranslation(activeLang.value, "partners", decodeURIComponent(route.params.id)),
+  getTranslation(
+    activeLang.value,
+    "partners",
+    decodeURIComponent(route.params.id),
+  ),
 );
 
 const setShowingInfo = ref("description");

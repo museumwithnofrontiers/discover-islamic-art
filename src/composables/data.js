@@ -16,7 +16,9 @@ const timelines = ref(timelinesData);
 const timelineEvents = ref(timelineEventsData);
 const collections = ref(collectionsData);
 const availableLangs = ref(manifestData.site.languages ?? []);
-const defaultLang = (manifestData.site.languages ?? []).some(lang => lang.code === "en")
+const defaultLang = (manifestData.site.languages ?? []).some(
+  (lang) => lang.code === "en",
+)
   ? "en"
   : ((manifestData.site.languages ?? [])[0] ?? "en");
 const projects = ref(manifestData.projects);
@@ -93,15 +95,16 @@ function partnerLabel(partnerId) {
 function languageLabel(languageCode) {
   if (!languageCode) return "";
   return (
-    manifestData.site.languages?.find(l => l.code === languageCode)?.label ??
+    manifestData.site.languages?.find((l) => l.code === languageCode)?.label ??
     languageCode
   );
 }
 function languageCode(languageCode) {
   if (!languageCode) return "";
   return (
-    manifestData.site.languages?.find(language => language.code === languageCode) ??
-    languageCode
+    manifestData.site.languages?.find(
+      (language) => language.code === languageCode,
+    ) ?? languageCode
   );
 }
 
