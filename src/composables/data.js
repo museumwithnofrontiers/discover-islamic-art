@@ -15,10 +15,12 @@ const dynasties = ref(dynastiesData);
 const timelines = ref(timelinesData);
 const timelineEvents = ref(timelineEventsData);
 const collections = ref(collectionsData);
-const availableLangs = ref(manifestData.languages ?? []);
-const defaultLang = (manifestData.languages ?? []).includes("en")
+const availableLangs = ref(manifestData.site.languages ?? []);
+const defaultLang = (manifestData.site.languages ?? []).some(
+  (lang) => lang.code === "en",
+)
   ? "en"
-  : ((manifestData.languages ?? [])[0] ?? "en");
+  : ((manifestData.site.languages ?? [])[0] ?? "en");
 const projects = ref(manifestData.projects);
 
 const translationsCache = ref({});
@@ -90,6 +92,21 @@ function partnerLabel(partnerId) {
     translations.value.partners[partnerId]?.name ?? fallback?.id ?? partnerId
   );
 }
+function languageLabel(languageCode) {
+  if (!languageCode) return "";
+  return (
+    manifestData.site.languages?.find((l) => l.code === languageCode)?.label ??
+    languageCode
+  );
+}
+function languageCode(languageCode) {
+  if (!languageCode) return "";
+  return (
+    manifestData.site.languages?.find(
+      (language) => language.code === languageCode,
+    ) ?? languageCode
+  );
+}
 
 export function useInventoryData() {
   return {
@@ -111,5 +128,7 @@ export function useInventoryData() {
     countryLabel,
     dynastyLabel,
     partnerLabel,
+    languageLabel,
+    languageCode,
   };
 }
