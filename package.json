@@ -19,7 +19,7 @@
     "@museumwnf/islamicart-data": "^1.0.46",
     "leaflet": "^1.9.4",
     "marked": "^18.0.5",
-    "vue": "^3.5.40",
+    "vue": "^3.5.44",
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
