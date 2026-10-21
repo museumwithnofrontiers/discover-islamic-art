@@ -20,8 +20,8 @@
         <font-awesome-icon :icon="['fas', 'reply']" /> Back
       </button>
 
-      <!-- <LoaderComponent /> -->
-      <div id="partner-profile">
+      <LoaderComponent v-if="!loaded" />
+      <div v-else id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
@@ -227,6 +227,7 @@
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useInventoryData } from "../composables/data.js";
+import LoaderComponent from "../components/LoaderComponent.vue";
 import ZoomComponent from "../components/ZoomComponent.vue";
 
 const route = useRoute();
@@ -244,6 +245,8 @@ const {
   getTranslation,
   partners,
 } = useInventoryData();
+
+const loaded = computed(() => Boolean(text.value));
 
 const partner = computed(
   () =>
@@ -396,7 +399,7 @@ function back() {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  color: var(--text-light);
+  color: var(--text-dark);
   font-size: 95%;
   padding: 4px 8px;
 }

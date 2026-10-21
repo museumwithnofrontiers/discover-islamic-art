@@ -39,6 +39,9 @@
   --text-light: var(--vt-c-base-light);
   --text-dark: var(--vt-c-base-dark);
 
+  --loader-light: var(--vt-c-medium);
+  --loader-dark: var(--vt-c-dark);
+
   --page-bg: var(--vt-c-lightest);
   --content-bg: var(--vt-c-base-light);
   --section-bg: var(--vt-c-base-light);
