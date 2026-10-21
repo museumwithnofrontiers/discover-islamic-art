@@ -166,14 +166,14 @@ function goToItem(item) {
   font-weight: 400;
   color: var(--heading);
   margin-bottom: 10px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .home-intro {
   font-size: 14px;
   line-height: 1.7;
   color: var(--text);
   max-width: 680px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 
 /* Cards */
@@ -206,18 +206,18 @@ function goToItem(item) {
   font-weight: 500;
   color: var(--heading);
   margin-bottom: 8px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .home-card-desc {
   font-size: 13px;
   line-height: 1.65;
   color: var(--muted);
   margin-bottom: 12px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .home-card-link {
   font-size: 13px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-weight: 500;
   color: var(--nav-active);
 }
@@ -257,7 +257,7 @@ function goToItem(item) {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--muted);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   margin-bottom: 6px;
 }
 .featured-name {
@@ -266,12 +266,12 @@ function goToItem(item) {
   color: var(--heading);
   margin-bottom: 8px;
   line-height: 1.3;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .featured-meta {
   font-size: 13px;
   color: var(--muted);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   margin-bottom: 4px;
 }
 .featured-link {
@@ -280,6 +280,6 @@ function goToItem(item) {
   font-size: 13px;
   font-weight: 500;
   color: var(--nav-active);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 </style>
