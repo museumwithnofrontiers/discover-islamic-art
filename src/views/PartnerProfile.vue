@@ -379,13 +379,17 @@ function back() {
 
 onMounted(() => {
   if (!mapContainer.value) return;
-  currentMap = L.map(mapContainer.value).setView([partner.value.latitude, partner.value.longitude], 15);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  currentMap = L.map(mapContainer.value).setView(
+    [partner.value.latitude, partner.value.longitude],
+    15,
+  );
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(currentMap);
   const customPinIcon = L.divIcon({
-    className: 'custom-map-pin',
+    className: "custom-map-pin",
     html: `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#001d66" width="36px" height="36px">
         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -393,9 +397,12 @@ onMounted(() => {
     `,
     iconSize: [36, 36],
     iconAnchor: [18, 36],
-    popupAnchor: [0, -36]
+    popupAnchor: [0, -36],
   });
-  const mapMarker = L.marker([partner.value.latitude, partner.value.longitude], { icon: customPinIcon }).addTo(currentMap);
+  const mapMarker = L.marker(
+    [partner.value.latitude, partner.value.longitude],
+    { icon: customPinIcon },
+  ).addTo(currentMap);
   mapMarker.bindPopup(`${text.value.name}`);
 });
 

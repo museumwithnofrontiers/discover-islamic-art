@@ -6,13 +6,9 @@
   </div>
 </template>
 
-
-
 <script>
 export default { name: "LoaderComponent" };
 </script>
-
-
 
 <style>
 .loader-container {
