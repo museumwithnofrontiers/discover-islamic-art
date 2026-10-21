@@ -20,8 +20,8 @@
         <font-awesome-icon :icon="['fas', 'reply']" /> Back
       </button>
 
-      <!-- <LoaderComponent /> -->
-      <div id="partner-profile">
+      <LoaderComponent v-if="!loaded" />
+      <div v-else id="partner-profile">
         <p id="partner-name">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
@@ -214,20 +214,22 @@
   <!-- Map -->
   <section v-if="mapEmbedUrl" class="map-section">
     <p class="profile-map-label">Museum on OpenStreetMap</p>
-    <!-- <iframe class="map-frame" :src="mapEmbedUrl" loading="lazy" :title="$t('partner.map.onTheMap')" /> -->
-    <iframe
+    <!-- <iframe
       class="map-frame partner-profile-map"
       :src="mapEmbedUrl"
       loading="lazy"
-    />
+    /> -->
+    <div ref="mapContainer" class="map-frame partner-profile=map"></div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useInventoryData } from "../composables/data.js";
+import LoaderComponent from "../components/LoaderComponent.vue";
 import ZoomComponent from "../components/ZoomComponent.vue";
+import L from "leaflet";
 
 const route = useRoute();
 const router = useRouter();
@@ -244,6 +246,8 @@ const {
   getTranslation,
   partners,
 } = useInventoryData();
+
+const loaded = computed(() => Boolean(text.value));
 
 const partner = computed(
   () =>
@@ -355,6 +359,8 @@ const mapEmbedUrl = computed(() => {
   const bbox = [lon - delta, lat - delta, lon + delta, lat + delta].join(",");
   return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 });
+const mapContainer = ref(null);
+let currentMap = null;
 
 function imageCredit(img) {
   const parts = [];
@@ -370,6 +376,41 @@ function back() {
     router.push("/partners");
   }
 }
+
+onMounted(() => {
+  if (!mapContainer.value) return;
+  currentMap = L.map(mapContainer.value).setView(
+    [partner.value.latitude, partner.value.longitude],
+    15,
+  );
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(currentMap);
+  const customPinIcon = L.divIcon({
+    className: "custom-map-pin",
+    html: `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#001d66" width="36px" height="36px">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      </svg>
+    `,
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36],
+  });
+  const mapMarker = L.marker(
+    [partner.value.latitude, partner.value.longitude],
+    { icon: customPinIcon },
+  ).addTo(currentMap);
+  mapMarker.bindPopup(`${text.value.name}`);
+});
+
+onUnmounted(() => {
+  if (currentMap) {
+    currentMap.remove();
+  }
+});
 </script>
 
 <style>
@@ -396,7 +437,7 @@ function back() {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  color: var(--text-light);
+  color: var(--text-dark);
   font-size: 95%;
   padding: 4px 8px;
 }

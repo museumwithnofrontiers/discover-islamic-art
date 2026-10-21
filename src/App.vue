@@ -60,7 +60,7 @@ import { RouterView, RouterLink } from "vue-router";
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Arabic:ital,wght@0,300;0,400;0,700;1,400&display=swap");
 
 #app {
   width: 1350px;
@@ -97,7 +97,7 @@ a:hover {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--header-fg);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-weight: 400;
   opacity: 0.8;
 }
@@ -106,7 +106,7 @@ a:hover {
   font-weight: 400;
   color: var(--header-fg);
   letter-spacing: 0.02em;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px var(--gold-light);
 }
@@ -128,7 +128,7 @@ a:hover {
   width: 100%;
   padding: 4px 10px;
   color: var(--nav-text);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
@@ -156,7 +156,7 @@ a:hover {
   background: var(--footer-bg);
   border-top: 1px solid var(--nav-alt-bg);
   padding: 10px 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: var(--footer-fg);
@@ -179,7 +179,7 @@ a:hover {
   border-bottom: 2px solid var(--gold-dark);
   padding-bottom: 4px;
   margin-bottom: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 
 /* ── Shared item list & cards ───────────────────────────────────────────── */
@@ -229,12 +229,12 @@ a:hover {
   font-size: 14px;
   color: var(--text);
   margin-bottom: 3px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .item-list-meta {
   font-size: 12px;
   color: var(--muted);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .item-list-meta span + span::before {
   content: " · ";
@@ -247,7 +247,7 @@ a:hover {
   gap: 4px;
   padding: 14px 0 0;
   flex-wrap: wrap;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 12px;
 }
 .pagination-info {
@@ -262,7 +262,7 @@ a:hover {
   color: var(--text);
   cursor: pointer;
   font-size: 12px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .page-btn:hover {
   background: var(--gold-pale);
@@ -292,7 +292,7 @@ a:hover {
   color: var(--muted);
   width: 160px;
   vertical-align: middle;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
 }
 .form-table td {
   padding: 6px 0;
@@ -302,7 +302,7 @@ a:hover {
 select,
 input[type="text"],
 input[type="number"] {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 13px;
   padding: 4px 8px;
   border: 1px solid var(--border);
@@ -321,7 +321,7 @@ input:focus {
   padding: 6px 18px;
   background: var(--nav-bg);
   color: var(--nav-fg);
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 13px;
   font-weight: 500;
   border: none;
@@ -344,7 +344,7 @@ input:focus {
 .back-link {
   display: inline-block;
   margin-bottom: 12px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 13px;
   color: var(--muted);
 }
@@ -356,7 +356,7 @@ input:focus {
   display: inline-block;
   margin-bottom: 12px;
   margin-left: 16px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
   font-size: 13px;
   color: var(--muted);
 }
