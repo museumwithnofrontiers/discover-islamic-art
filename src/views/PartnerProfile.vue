@@ -394,7 +394,7 @@ onMounted(() => {
     [partner.value.latitude, partner.value.longitude],
     { icon: customPinIcon },
   ).addTo(currentMap);
-  mapMarker.bindPopup(`${text.value.name}`);
+  mapMarker.bindPopup(`${text.value.name}<br/>${text.value.city}, ${countryLabel(partner.value.country_id)}`);
 });
 
 onUnmounted(() => {
