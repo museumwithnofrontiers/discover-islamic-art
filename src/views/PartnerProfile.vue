@@ -22,7 +22,7 @@
 
       <LoaderComponent v-if="!loaded" />
       <div v-else id="partner-profile">
-        <p id="partner-name">{{ text.name }}</p>
+        <p id="partner-name" class="condensed">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
           >{{ countryLabel(partner.country_id) }}
@@ -161,7 +161,7 @@
             <div
               v-if="setShowingInfo === 'description'"
               v-html="text.description"
-              :dir="rightToLeft ? 'rtl' : 'ltr'"
+              :dir="activeLang === 'ar' ? 'rtl' : 'ltr'"
             ></div>
             <div v-if="setShowingInfo === 'contact'">
               <p id="address-header">Address(es)</p>
@@ -213,7 +213,7 @@
 
   <!-- Map -->
   <section v-if="mapEmbedUrl" class="map-section">
-    <p class="profile-map-label">Museum on OpenStreetMap</p>
+    <p class="profile-map-label condensed">Museum on OpenStreetMap</p>
     <!-- <iframe
       class="map-frame partner-profile-map"
       :src="mapEmbedUrl"
@@ -273,7 +273,6 @@ const text = computed(() =>
 const setShowingInfo = ref("description");
 const currentPhoto = ref(partner.value.images[0].url);
 const showLightbox = ref(false);
-const rightToLeft = ref(false);
 
 // ── Related items (View Objects / View Monuments) ────────────────────────
 
@@ -299,14 +298,6 @@ function viewItemsLink() {
     path: "/permanent-collection/results",
     query: { partner: partner.value.id },
   };
-}
-
-function setRightToLeft(lang) {
-  if (activeLang === "ar") {
-    this.rightToLeft = true;
-  } else {
-    this.rightToLeft = false;
-  }
 }
 
 function slideshow(clicked) {

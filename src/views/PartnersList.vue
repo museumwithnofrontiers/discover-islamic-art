@@ -1,7 +1,7 @@
 <template>
   <div id="partners-container">
     <div id="partners-options-container">
-      <div id="partners-back">
+      <div id="partners-back" class="condensed">
         <button @click="$router.go(-1)">
           <font-awesome-icon :icon="['fas', 'reply']" />Back
         </button>
@@ -49,7 +49,7 @@
           v-for="(country, countryIndex) in groupedByCountry"
           :key="country.name"
         >
-          <div class="partners-country">{{ country.name }}</div>
+          <div class="partners-country condensed">{{ country.name }}</div>
           <div class="partner-container">
             <div
               class="partner"
@@ -57,7 +57,7 @@
               :key="partner.id"
             >
               <div class="partner-text-links-container">
-                <div class="partner-name">
+                <div class="partner-name condensed">
                   <router-link
                     class="partner-profile"
                     :to="{
