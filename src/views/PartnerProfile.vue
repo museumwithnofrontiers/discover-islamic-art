@@ -219,7 +219,7 @@
       :src="mapEmbedUrl"
       loading="lazy"
     /> -->
-    <div ref="mapContainer" class="map-frame partner-profile=map"></div>
+    <div ref="mapContainer" class="partner-profile-map"></div>
   </section>
 </template>
 
@@ -678,7 +678,12 @@ onUnmounted(() => {
 }
 
 .map-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
   background-color: var(--content-bg);
+  z-index: 1;
 }
 .profile-map-label {
   font-size: 110%;
@@ -688,14 +693,11 @@ onUnmounted(() => {
   margin-bottom: 100px;
 }
 
-#partner-profile-map {
-  height: 50vh;
-  max-height: 400px;
-}
-
-.map-frame {
+.partner-profile-map {
   width: 100%;
   height: 380px;
+  max-height: 400px;
+  min-height: 0;
   border: 1px solid var(--border);
 }
 
