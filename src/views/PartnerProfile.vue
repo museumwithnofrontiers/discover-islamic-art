@@ -117,7 +117,7 @@
                   "
                 >
                   <div v-if="pic.photographer">
-                    {{ $t("photograph") }}: {{ pic.photographer }}
+                    Photograph: {{ pic.photographer }}
                   </div>
                   <div v-if="pic.copyright">&#169; {{ pic.copyright }}</div>
                   <div v-if="pic.alt_text">{{ pic.alt_text }}</div>
