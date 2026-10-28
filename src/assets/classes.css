@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.condensed {
+  font-family: "Roboto Condensed", "Noto Sans Arabic", sans-serif;
+}
+
 .project-dga {
   background-color: var(--dga);
 }

@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
-// import CollectionEntrance from '../views/CollectionEntrance.vue'
+import CollectionsEntry from "../views/CollectionsEntry.vue";
 // import CollectionResults from '../views/CollectionResults.vue'
 // import Database from '../views/Database.vue'
 // import DatabaseResults from '../views/DatabaseResults.vue'
@@ -21,7 +21,7 @@ import PartnerProfile from "../views/PartnerProfile.vue";
 
 const routes = [
   { path: "/", component: HomePage },
-  // { path: '/collection', component: CollectionEntrance },
+  { path: "/permanent-collection", component: CollectionsEntry },
   // { path: '/collection/results', component: CollectionResults },
   // { path: '/database', component: Database },
   // { path: '/database/results', component: DatabaseResults },

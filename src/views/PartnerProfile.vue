@@ -22,7 +22,7 @@
 
       <LoaderComponent v-if="!loaded" />
       <div v-else id="partner-profile">
-        <p id="partner-name">{{ text.name }}</p>
+        <p id="partner-name" class="condensed">{{ text.name }}</p>
         <p id="partner-location">
           <span v-if="text.city">{{ text.city }}, </span
           >{{ countryLabel(partner.country_id) }}
@@ -117,7 +117,7 @@
                   "
                 >
                   <div v-if="pic.photographer">
-                    {{ $t("photograph") }}: {{ pic.photographer }}
+                    Photograph: {{ pic.photographer }}
                   </div>
                   <div v-if="pic.copyright">&#169; {{ pic.copyright }}</div>
                   <div v-if="pic.alt_text">{{ pic.alt_text }}</div>
@@ -161,7 +161,7 @@
             <div
               v-if="setShowingInfo === 'description'"
               v-html="text.description"
-              :dir="rightToLeft ? 'rtl' : 'ltr'"
+              :dir="activeLang === 'ar' ? 'rtl' : 'ltr'"
             ></div>
             <div v-if="setShowingInfo === 'contact'">
               <p id="address-header">Address(es)</p>
@@ -213,13 +213,13 @@
 
   <!-- Map -->
   <section v-if="mapEmbedUrl" class="map-section">
-    <p class="profile-map-label">Museum on OpenStreetMap</p>
+    <p class="profile-map-label condensed">Museum on OpenStreetMap</p>
     <!-- <iframe
       class="map-frame partner-profile-map"
       :src="mapEmbedUrl"
       loading="lazy"
     /> -->
-    <div ref="mapContainer" class="map-frame partner-profile=map"></div>
+    <div ref="mapContainer" class="partner-profile-map"></div>
   </section>
 </template>
 
@@ -273,7 +273,6 @@ const text = computed(() =>
 const setShowingInfo = ref("description");
 const currentPhoto = ref(partner.value.images[0].url);
 const showLightbox = ref(false);
-const rightToLeft = ref(false);
 
 // ── Related items (View Objects / View Monuments) ────────────────────────
 
@@ -299,14 +298,6 @@ function viewItemsLink() {
     path: "/permanent-collection/results",
     query: { partner: partner.value.id },
   };
-}
-
-function setRightToLeft(lang) {
-  if (activeLang === "ar") {
-    this.rightToLeft = true;
-  } else {
-    this.rightToLeft = false;
-  }
 }
 
 function slideshow(clicked) {
@@ -403,7 +394,9 @@ onMounted(() => {
     [partner.value.latitude, partner.value.longitude],
     { icon: customPinIcon },
   ).addTo(currentMap);
-  mapMarker.bindPopup(`${text.value.name}`);
+  mapMarker.bindPopup(
+    `${text.value.name}<br/>${text.value.city}, ${countryLabel(partner.value.country_id)}`,
+  );
 });
 
 onUnmounted(() => {
@@ -687,7 +680,12 @@ onUnmounted(() => {
 }
 
 .map-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
   background-color: var(--content-bg);
+  z-index: 1;
 }
 .profile-map-label {
   font-size: 110%;
@@ -697,14 +695,11 @@ onUnmounted(() => {
   margin-bottom: 100px;
 }
 
-#partner-profile-map {
-  height: 50vh;
-  max-height: 400px;
-}
-
-.map-frame {
+.partner-profile-map {
   width: 100%;
   height: 380px;
+  max-height: 400px;
+  min-height: 0;
   border: 1px solid var(--border);
 }
 
