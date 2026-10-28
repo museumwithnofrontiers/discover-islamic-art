@@ -24,7 +24,7 @@
           </option>
         </select> -->
         <!-- Dynasty options -->
-         <select
+        <select
           v-if="dynastiesList"
           id="dynasty-option"
           class="search-option"
@@ -57,8 +57,8 @@
         <!-- Date options -->
         <!-- Nested due to formatting side by side -->
         <!-- <div id="dates-container"> -->
-          <!-- Start date options -->
-          <!-- <select
+        <!-- Start date options -->
+        <!-- <select
             id="start-date-option"
             class="search-option"
             v-model="start"
@@ -69,8 +69,8 @@
               {{ date[1] }}
             </option>
           </select> -->
-          <!-- End date options -->
-          <!-- <select
+        <!-- End date options -->
+        <!-- <select
             id="end-date-option"
             class="search-option"
             v-model="end"
@@ -85,11 +85,11 @@
       </div>
     </div>
 
-     <div id="description">
+    <div id="description">
       <p>
         As a first approach, this might be the best choice to start exploring
-        the <span class="italic">Discover Islamic Art</span> database. A range of
-        filters allows you to choose what you want to see.
+        the <span class="italic">Discover Islamic Art</span> database. A range
+        of filters allows you to choose what you want to see.
       </p>
       <div class="break"></div>
 
@@ -97,11 +97,19 @@
         For research, you can use the <span class="bold">Search*</span> bar,
         located on the top right of the page. If you are interested in learning
         about contributions from a specific institution, the
-        <router-link :to="{ path: '/partners' }" class="bold">Partner</router-link>
+        <router-link :to="{ path: '/partners' }" class="bold"
+          >Partner</router-link
+        >
         section would be the best place to start. On the
-        <router-link :to="{ path: '/timeline' }" class="bold">Timeline</router-link>
+        <router-link :to="{ path: '/timeline' }" class="bold"
+          >Timeline</router-link
+        >
         you will find countries’ historical context information, while
-        <a href="https://www.museumwnf.org/mycollection/my_welcome.php" class="bold">My Collection</a>
+        <a
+          href="https://www.museumwnf.org/mycollection/my_welcome.php"
+          class="bold"
+          >My Collection</a
+        >
         lets you add any item from this project to your personal collection.
       </p>
       <div class="break"></div>
@@ -110,14 +118,16 @@
         * Please be aware that the Search tool covers only the artefacts in this
         Gallery. If you wish to carry out a search in the overall MWNF Database,
         please click
-        <a href="https://www.museumwnf.org/database_searchform.php" target="_blank">here</a>
+        <a
+          href="https://www.museumwnf.org/database_searchform.php"
+          target="_blank"
+          >here</a
+        >
         or go to the above-mentioned projects to search their databases.
       </p>
     </div>
   </div>
 </template>
-
-
 
 <script setup>
 import { ref, computed } from "vue";
@@ -148,13 +158,13 @@ const dynasty = ref("");
 
 const partnersList = computed(() => {
   return partners.value
-    .map(p => ({ id: p.id, name: partnerLabel(p.id) }))
+    .map((p) => ({ id: p.id, name: partnerLabel(p.id) }))
     .sort((a, b) => a.name.localeCompare(b.name));
 });
 
 const dynastiesList = computed(() => {
   return dynasties.value
-    .map(p => ({ id: p.id, name: dynastyLabel(p.id) }))
+    .map((p) => ({ id: p.id, name: dynastyLabel(p.id) }))
     .sort((a, b) => a.name.localeCompare(b.name));
 });
 
