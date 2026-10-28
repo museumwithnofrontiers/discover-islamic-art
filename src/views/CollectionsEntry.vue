@@ -262,6 +262,7 @@ const dynastiesList = computed(() => {
   width: 100%;
   max-width: 300px;
   padding-bottom: 10px;
+  font-family: Roboto Condensed, Noto Sans Arabic, sans-serif;
   font-size: 125%;
   font-weight: bold;
 }
