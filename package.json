@@ -29,7 +29,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "~10.12.1",
     "globals": "^17.14.0",
-    "npm-run-all2": "^9.0.2",
+    "npm-run-all2": "^9.1.0",
     "prettier": "3.10.1",
     "vite": "^8.3.8",
     "vite-plugin-vue-devtools": "^8.1.5",
